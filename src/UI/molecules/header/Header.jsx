@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutAction } from '../../../BusinessLogic/firebase/logout';
-import { ImExit } from 'react-icons/im';
-import Logo from '../../assets/logo/logo_media_book.png';
+import { MdExitToApp } from 'react-icons/md';
+import LogoWhite from '../../assets/logo/logoWhite_media_book.png';
+import '../../assets/styles/header.css'
 
 const Header = () => {
 	const { data } = useSelector((store) => store.todos);
@@ -15,7 +16,7 @@ const Header = () => {
 					<img src={data.photoUrl} alt="" />
 					<h3>{data.displayName}</h3>
 				</span>
-				<img className="header-logo" src={Logo} alt="Media Book" />
+				<img className="header-logo" src={LogoWhite} alt="Media Book" />
 				<span>
 					<button
 						onClick={() => dispatch(logoutAction())}
@@ -23,7 +24,7 @@ const Header = () => {
 						type="button"
 						value="Salir"
 					>
-						<ImExit /> Salir
+						<MdExitToApp style={{marginTop: '5px'}}/> Salir
 					</button>
 				</span>
 			</section>

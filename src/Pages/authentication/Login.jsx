@@ -6,6 +6,7 @@ import { loginGoogle } from '../../BusinessLogic/firebase/loginGoogle';
 import Logo from '../../UI/assets/logo/logo_media_book.png';
 import logoGoogle from '../../UI/assets/logo/logoGoogle.png';
 import ImageLogin from '../../UI/assets/image/image_login.png';
+import '../../UI/assets/styles/login.css'
 
 const Login = () => {
 	const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const Login = () => {
 				</span>
 			</div>
 			<div className="container-img">
-				<img className="center" src={ImageLogin} alt="Media Book" />
+				<img className='imageLogin' src={ImageLogin} alt="Media Book" />
 			</div>
 		</section>
 	);

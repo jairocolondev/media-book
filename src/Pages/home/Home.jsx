@@ -1,87 +1,114 @@
+import React, { useEffect, useState } from 'react';
+import { filterTags } from '../../BusinessLogic/data/filterTags';
+import { getData } from '../../BusinessLogic/data/getData';
+import { useGetInfinite } from '../../BusinessLogic/hooks/useMoreInfinite';
+import Like_post from '../../UI/assets/logo/like_post.svg';
 import '../../UI/assets/styles/home.css';
-import {Modal} from '../../UI/organisms/modal/Modal';
-import {PostCard} from '../../UI/organisms/postCard/PostCard';
-import {CardOwner} from '../../UI/organisms/cardOwner/CardOwner';
-import {CardComments} from '../../UI/organisms/cardComments/CardComments';
-import React, { useState } from 'react';
-import { useOwner } from '../../BusinessLogic/hooks/useOwner';
-import { useModal } from '../../BusinessLogic/hooks/useModal';
-import { useComments } from '../../BusinessLogic/hooks/useComments';
-import {useGetInfinite} from '../../BusinessLogic/hooks/useMoreInfinite';
-import {SelectTags} from '../../UI/molecules/selectTag/SelectTags';
 
-function Home() {
-	const [tag, setTag] = useState('');
-	const [owner, getOwner] = useOwner();
-	const [comments, getComments] = useComments();
-	const [posts, more, loader, loaderMore, totalPosts] = useGetInfinite(tag);
-	const [isOpenModalOwner, openModalOwner, closeModalOwner] = useModal(false);
-	const [isOpenModalComments, openModalComments, closeModalComments] =
-		useModal(false);
+const Home = () => {
+	const [data, setData] = useState([]);
+	const [id, setId] = useState(process.env.REACT_APP_DUMMY_API_KEY);
+	const idModal = data.filter((res) => res.id === id);
+	const [posts, more, loader, loaderMore, totalPosts] = useGetInfinite(data);
 
 	const firstValidation =
-		posts.length > 0 && posts.length <= totalPosts && posts.length >= 10;
+		posts.length > 0 && posts.length <= totalPosts && posts.length >= 6;
 	const secondValidation = posts.length >= 0 && posts.length === totalPosts;
 
-	const setInfoOwner = (param) => {
-		getOwner(param);
-	};
+	useEffect(() => {
+		getData('post').then(({ data }) => setData(data.data));
+	}, []);
 
-	const setInfoComments = (param) => {
-		getComments(param);
+	const handleFiltro = (tag) => {
+		getData('post').then(({ data }) => setData(filterTags(data.data, tag)));
 	};
 
 	return (
-		<div className="home">
-			<h1 className="title">Estas son las publicaciones para ti</h1>
-			<section className="container">
-				<SelectTags tag={tag} setTag={setTag} />
-
-				<div className="home-posts">
-					{loader && <p className="margin-auto">Cargando Publicaciones...</p>}
-					{posts.length > 0 &&
-						posts?.map((el) => (
-							<PostCard
-								key={el.id}
-								data={el}
-								openModalComments={openModalComments}
-								openModalOwner={openModalOwner}
-								setOwner={setInfoOwner}
-								setComments={setInfoComments}
-							/>
-						))}
-				</div>
+		<div className="container">
+			<span style={{ fontStyle: 'bold', fontSize: '25px' }}>Filtra por: </span>
+			<button
+				className="btn-filtro"
+				onClick={() => getData('post').then(({ data }) => setData(data.data))}
+			>
+				Todo
+			</button>
+			<button className="btn-filtro" onClick={() => handleFiltro('animal')}>
+				Animal
+			</button>
+			<button className="btn-filtro" onClick={() => handleFiltro('human')}>
+				Human
+			</button>
+			<button className="btn-filtro" onClick={() => handleFiltro('snow')}>
+				Snow
+			</button>
+			<div className="home-container">
+				{loader && <p className="margin-auto">Cargando posts...</p>}
+				{data.map((res, index) => (
+					<section key={index} className="post">
+						<div className="post-contenido">
+							<section className="">
+								<img className="img-post" src={res.image} alt="" />
+								{res.tags.map((tag, index) => (
+									<span className="tag" key={index}>
+										{tag}{' '}
+									</span>
+								))}
+								<div className="post-header">
+									<span>
+										<img
+											className="img-header"
+											src={res.owner.picture}
+											alt=""
+										/>
+										<a href="#modal3" onClick={() => setId(res.id)}>
+											{res.owner.firstName} {res.owner.lastName}
+										</a>
+									</span>
+									<strong>
+										<img className="like" src={Like_post} alt="" />
+										{res.likes}
+									</strong>
+								</div>
+								<hr />
+								<p>{res.text}</p>
+							</section>
+						</div>
+					</section>
+				))}
+			</div>
+			<div className='divMore'>
 				{secondValidation && (
-					<div className="w-100 d-flex align-items justify-content">
+					<div>
 						<p>No hay más post para visualizar</p>
 					</div>
 				)}
 				{firstValidation && (
-					<div className="w-100 d-flex align-items justify-content">
-						<button
-							type="button"
-							className="button button-secondary my-1"
-							onClick={more}
-						>
+					<div>
+						<button type="button" className="btnMore" onClick={more}>
 							{loaderMore ? 'Cargando posts...' : 'Ver más'}
 						</button>
 					</div>
 				)}
-				{/* modal owner */}
-				<Modal isOpen={isOpenModalComments} closeModal={closeModalComments}>
-					<h3>Comentarios</h3>
-					{comments.length > 0 && <CardComments data={comments} />}
-					{comments.length === 0 && <p>Publicación sin comentarios</p>}
-					{comments === true && <p>Cargando comentarios</p>}
-				</Modal>
-				<Modal isOpen={isOpenModalOwner} closeModal={closeModalOwner}>
-					<h3>Usuario</h3>
-					{Object.keys(owner).length > 0 && <CardOwner data={owner} />}
-					{owner === true && <p>Cargando datos del usuario</p>}
-				</Modal>
-			</section>
+			</div>
+			{idModal.map((res, index) => (
+				<div key={index} id="modal3" className="modalmask">
+					<div className="modalbox resize">
+						<a href="#close" title="Close" className="close">
+							X
+						</a>
+						<h2>
+							{res.owner.firstName} {res.owner.lastName}
+						</h2>
+						<h5>
+							<strong>Id: </strong>
+							{res.owner.id}
+						</h5>
+						<img src={res.owner.picture} alt="" />
+					</div>
+				</div>
+			))}
 		</div>
 	);
-}
+};
 
 export { Home };
