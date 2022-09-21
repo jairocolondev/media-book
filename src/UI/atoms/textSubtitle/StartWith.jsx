@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
 const StartWith = ({ img, text }) => {
-   return (
-      <button className='btnGF'>
-         <img src={img} alt="" />
-         Inicia con {text}
-      </button>
-   )
-}
+	return (
+		<button className="btnGF">
+			<img src={img} alt="" />
+			Inicia con {text}
+		</button>
+	);
+};
 
-export {StartWith}
+export { StartWith };

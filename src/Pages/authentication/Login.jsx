@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { ButtonLogin } from '../../../UI/atoms/button/ButtonLogin';
-import { StartWith } from '../../../UI/atoms/textSubtitle/StartWith';
-import { loginGoogle } from '../../../BusinessLogic/firebase/loginGoogle';
-import Logo from '../../../UI/assets/logo/logo_media_book.png';
-import logoGoogle from '../../../UI/assets/logo/logoGoogle.png';
-import ImageLogin from '../../../UI/assets/image/image_login.png';
+import { ButtonLogin } from '../../UI/atoms/button/ButtonLogin';
+import { StartWith } from '../../UI/atoms/textSubtitle/StartWith';
+import { loginGoogle } from '../../BusinessLogic/firebase/loginGoogle';
+import Logo from '../../UI/assets/logo/logo_media_book.png';
+import logoGoogle from '../../UI/assets/logo/logoGoogle.png';
+import ImageLogin from '../../UI/assets/image/image_login.png';
 
 const Login = () => {
 	const dispatch = useDispatch();

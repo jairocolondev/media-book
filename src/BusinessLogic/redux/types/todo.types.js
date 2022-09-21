@@ -1,3 +1,5 @@
-export const typesLogin = {
+const typesLogin = {
    user: 'DataUser'
 }
+
+export {typesLogin}

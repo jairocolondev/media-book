@@ -1,0 +1,12 @@
+.card-comment {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+}
+
+.card-comment p {
+	width: 100%;
+	padding: 0.5em;
+	margin-bottom: 0.25em;
+	background-color: var(--neutral);
+}
