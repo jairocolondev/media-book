@@ -6,7 +6,7 @@ import { dataLogin } from '../redux/slice/todo.slice';
 import { PublicRoutes } from './PublicRoutes';
 import { PrivateRoutes } from './PrivateRoutes';
 import { DasboardRouter } from './DasboardRouter';
-import { Login } from '../../Pages/authentication/login/Login';
+import { Login } from '../../Pages/authentication/Login';
 import { app } from '../firebase/firebaseConfig';
 
 function App() {

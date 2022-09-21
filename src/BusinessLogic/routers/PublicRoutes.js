@@ -1,6 +1,6 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 
 const PublicRoutes = ({ isAuth, children }) => {
-  return !isAuth ? children : <Navigate to='/' />
-}
-export {PublicRoutes}
+	return !isAuth ? children : <Navigate to="/" />;
+};
+export { PublicRoutes };

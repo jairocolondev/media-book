@@ -103,7 +103,7 @@ body {
 	width: 100%;
 }
 
-.button {
+/* .button {
 	background-color: var(--colorPrimario);
 	border: 2px solid var(--colorPrimario);
 	border-radius: 0.7rem;
@@ -127,13 +127,13 @@ body {
 	color: var(--colorPrimario);
 	animation: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	-webkit-animation: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+} */
 
 /* .contLogin {
 	margin-top: 2rem;
 } */
 
-.btnGF {
+/* .btnGF {
 	align-items: center;
 	background-color: transparent;
 	border: 3px solid rgba(11, 70, 84, 0.25);
@@ -151,7 +151,7 @@ body {
 	background-color: rgba(39, 39, 39, 0.486);
 	color: var(--bgBlanco);
 	font-weight: bold;
-}
+} */
 
 .btnGF img {
 	margin-right: 10px;

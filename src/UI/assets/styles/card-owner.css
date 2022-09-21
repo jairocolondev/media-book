@@ -1,0 +1,22 @@
+.card-owner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.card-owner img {
+	width: 4.5em;
+	height: 4.5em;
+	border-radius: 50%;
+	border: 2px solid var(--primary);
+	margin-bottom: 0.5em;
+}
+
+.card-owner p {
+	width: 100%;
+
+	padding: 0.5em;
+	margin-bottom: 0.25em;
+	background-color: var(--neutral);
+}
