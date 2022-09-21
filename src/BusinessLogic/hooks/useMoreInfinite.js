@@ -11,7 +11,7 @@ const useGetInfinite = (tag) => {
 	const [loader, setLoader] = useState(true);
 	const [loaderMore, setLoaderMore] = useState(false);
 	const [count, setCount] = useState(0);
-	const limit = 10;
+	const limit = 6;
 
 	const getPost = async (page) => {
 		let path =
