@@ -43,7 +43,7 @@ function App() {
 					}
 				/>
 				<Route
-					path="/"
+					path="/*"
 					element={
 						<PrivateRoutes isAuth={login}>
 							<DasboardRouter />
